@@ -1,0 +1,14 @@
+{
+  "name": "static-site-cleanup",
+  "version": "1.0.0",
+  "description": "Scripts to cleanup static WordPress export",
+  "main": "cleanup-site.js",
+  "scripts": {
+    "cleanup": "node cleanup-site.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.1.2",
+    "glob": "^13.0.0",
+    "sharp": "^0.34.5"
+  }
+}
