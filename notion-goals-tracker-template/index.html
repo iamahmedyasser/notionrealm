@@ -241,6 +241,170 @@ document.documentElement.style.scrollBehavior = "smooth";</script>
 <link rel="icon" href="../wp-content/uploads/2023/07/cropped-Avatarr-fotor-20230702211049-192x192.png" sizes="192x192">
 <link rel="apple-touch-icon" href="../wp-content/uploads/2023/07/cropped-Avatarr-fotor-20230702211049-180x180.png">
 <meta name="msapplication-TileImage" content="https://notionrealm.com/wp-content/uploads/2023/07/cropped-Avatarr-fotor-20230702211049-270x270.png">
+
+<style id="header-overhaul-css">
+    /* --- Global Styles --- */
+    /* Hide Hamburger & Mobile Menu by default globally to prevent Desktop duplicates */
+    #mobile-menu-toggle {
+        display: none !important;
+    }
+    #mobile-menu-container {
+        display: none !important;
+    }
+
+    /* --- Desktop Layout (Right-Aligned Button) --- */
+    /* Ensure the main container separates Logo+Nav from Button */
+    .wp-block-group.alignwide.is-content-justification-space-between {
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    /* Group Logo and Nav together with gap */
+    .wp-block-group.is-layout-flex.wp-block-group-is-layout-flex {
+        display: flex !important;
+        align-items: center !important;
+        gap: 30px !important;
+    }
+    
+    /* Ensure Nav items are horizontal on desktop */
+    .wp-block-navigation .wp-block-navigation__container {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 20px !important;
+    }
+
+    /* --- Mobile Layout (Hamburger Menu) --- */
+    @media (max-width: 768px) {
+        /* Show Hamburger Button */
+        #mobile-menu-toggle {
+            display: block !important;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 10px;
+            margin-left: auto; /* Push to right */
+        }
+
+        /* 1. Reset Main Row to Single Line: [Logo] [Burger] */
+        .wp-block-group.alignwide.is-content-justification-space-between {
+            flex-wrap: nowrap !important;
+            flex-direction: row !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+
+        /* 2. Mobile Menu Container Styling */
+        #mobile-menu-container {
+            display: none; /* Inherits global hidden, but valid here */
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #fff; /* Match header bg */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            z-index: 9999;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+            border-top: 1px solid #eee;
+        }
+
+        /* Only show when open */
+        #mobile-menu-container.is-open {
+            display: flex !important;
+        }
+
+        /* Stack items in dropdown */
+        #mobile-menu-container nav ul {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            width: 100%;
+            gap: 20px !important;
+        }
+    }
+</style>
+<script id="header-overhaul-js">
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Create Mobile Menu Container if not exists
+    if (!document.getElementById('mobile-menu-container')) {
+        const headerGroup = document.querySelector('.wp-block-template-part > .wp-block-group > .wp-block-group.alignwide');
+        
+        if (headerGroup) {
+            // Create Toggle Button
+            const toggleBtn = document.createElement('button');
+            toggleBtn.id = 'mobile-menu-toggle';
+            toggleBtn.innerHTML = '☰';
+            toggleBtn.ariaLabel = 'Menu';
+            
+            // Container
+            const logoNavGroup = headerGroup.children[0]; 
+            const buttonGroup = headerGroup.children[1]; 
+            
+            const nav = logoNavGroup.querySelector('nav');
+            
+            const menuContainer = document.createElement('div');
+            menuContainer.id = 'mobile-menu-container';
+            
+            if (nav && buttonGroup) {
+                // Clone Content
+                const navClone = nav.cloneNode(true);
+                const btnClone = buttonGroup.cloneNode(true);
+                
+                // --- Mobile Layout Fixes ---
+                // 1. Clear inline styles on UL to allow stacking
+                const ul = navClone.querySelector('ul');
+                if (ul) {
+                    // Force overrides via cssText to clear any 'display: flex' horizontal constraints
+                    ul.style.cssText = 'display: flex !important; flex-direction: column !important; align-items: flex-start !important; width: 100% !important; gap: 20px !important; margin: 0 !important; padding: 0 !important;';
+                    
+                    // Also ensure LIs take full width
+                    const lis = ul.querySelectorAll('li');
+                    lis.forEach(li => {
+                        li.style.width = '100%';
+                        li.style.marginBottom = '0';
+                    });
+                }
+                
+                // Append Modified Nav to Container
+                menuContainer.appendChild(navClone);
+                
+                // --- FIX: Append Button SEPARATELY below Nav (All Vertically Stacked) ---
+                // Reset styling on button to ensure it stacks properly
+                btnClone.style.cssText = 'width: 100% !important; margin-top: 15px !important; display: flex !important; justify-content: flex-start !important;';
+                
+                // If it's a buttons group, ensure it flows well
+                menuContainer.appendChild(btnClone);
+
+                
+                // Inject into DOM
+                headerGroup.parentElement.style.position = 'relative'; 
+                headerGroup.parentElement.appendChild(menuContainer);
+                headerGroup.appendChild(toggleBtn);
+                
+                // Add Toggle Logic
+                toggleBtn.addEventListener('click', function() {
+                    menuContainer.classList.toggle('is-open');
+                    toggleBtn.innerHTML = menuContainer.classList.contains('is-open') ? '✕' : '☰';
+                });
+                
+                // CSS to Hide Original Elements on Mobile
+                const hideCss = document.createElement('style');
+                hideCss.innerHTML = `
+                    @media (max-width: 768px) {
+                        /* Hide original Nav inside the Group */
+                        .wp-block-group.is-layout-flex > nav { display: none !important; }
+                        /* Hide original Button Group */
+                        .wp-block-group.alignwide > .wp-block-buttons { display: none !important; }
+                    }
+                `;
+                document.head.appendChild(hideCss);
+            }
+        }
+    }
+});
+</script>
 </head>
 
 <body class="wp-singular page-template-default page page-id-255 wp-custom-logo wp-embed-responsive wp-theme-raft">
@@ -248,9 +412,9 @@ document.documentElement.style.scrollBehavior = "smooth";</script>
 <div class="wp-site-blocks"><header class="wp-block-template-part">
 <div class="wp-block-group has-raft-bg-alt-background-color has-background is-content-justification-center is-layout-constrained wp-container-core-group-is-layout-5027de54 wp-block-group-is-layout-constrained" style="border-bottom-color:#f1f1ef;border-bottom-width:1px;margin-top:0;margin-bottom:0;padding-top:var(--wp--preset--spacing--20);padding-right:var(--wp--preset--spacing--30);padding-bottom:var(--wp--preset--spacing--20);padding-left:var(--wp--preset--spacing--30);  ">
 <div class="wp-block-group alignwide is-content-justification-space-between is-nowrap is-layout-flex wp-container-core-group-is-layout-c53a89c2 wp-block-group-is-layout-flex" style="padding-right:0;padding-left:0">
-<div class="wp-block-group is-layout-flex wp-container-core-group-is-layout-3f7fd023 wp-block-group-is-layout-flex" style="margin-top:0;margin-bottom:0;padding-right:0;padding-left:0"><div class="o-hide-on-mobile wp-block-site-logo"><a href="../" class="custom-logo-link" rel="home"><img width="50" height="50" src="../wp-content/uploads/2024/03/My-project.png" class="custom-logo" alt="Notionrealm Logo" decoding="async"></a></div>
+<div class="wp-block-group is-layout-flex wp-container-core-group-is-layout-3f7fd023 wp-block-group-is-layout-flex" style="margin-top:0;margin-bottom:0;padding-right:0;padding-left:0"><div class="wp-block-site-logo"><a href="../" class="custom-logo-link" rel="home"><img width="50" height="50" src="../wp-content/uploads/2024/03/My-project.png" class="custom-logo" alt="Notionrealm Logo" decoding="async"></a></div>
 
-<nav style="color: #5c5c5c;  " class="has-text-color items-justified-center no-wrap wp-block-navigation is-horizontal is-content-justification-center is-nowrap is-layout-flex wp-container-core-navigation-is-layout-419840b4 wp-block-navigation-is-layout-flex" aria-label="Header navigation" data-wp-interactive="core/navigation" data-wp-context="{&quot;overlayOpenedBy&quot;:{&quot;click&quot;:false,&quot;hover&quot;:false,&quot;focus&quot;:false},&quot;type&quot;:&quot;overlay&quot;,&quot;roleAttribute&quot;:&quot;&quot;,&quot;ariaLabel&quot;:&quot;Menu&quot;}"><ul style="color: #5c5c5c;; display: flex !important; list-style: none !important; padding: 0 !important; margin: 0 !important; gap: 20px !important; flex-direction: row !important;" class="wp-block-navigation__container has-text-color items-justified-center no-wrap wp-block-navigation"><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content" href="../notion-templates/"><span class="wp-block-navigation-item__label">Templates</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content" href="../blog/"><span class="wp-block-navigation-item__label">Blog</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content" href="../contact/"><span class="wp-block-navigation-item__label">Contact</span></a></li></ul></nav></div>
+<nav style="color: #5c5c5c;  " class="has-text-color items-justified-left no-wrap wp-block-navigation is-horizontal is-content-justification-left is-nowrap is-layout-flex wp-container-core-navigation-is-layout-419840b4 wp-block-navigation-is-layout-flex" aria-label="Header navigation" data-wp-interactive="core/navigation" data-wp-context="{&quot;overlayOpenedBy&quot;:{&quot;click&quot;:false,&quot;hover&quot;:false,&quot;focus&quot;:false},&quot;type&quot;:&quot;overlay&quot;,&quot;roleAttribute&quot;:&quot;&quot;,&quot;ariaLabel&quot;:&quot;Menu&quot;}"><ul style="color: #5c5c5c;; display: flex !important; list-style: none !important; padding: 0 !important; margin: 0 !important; gap: 20px !important; flex-direction: row !important;" class="wp-block-navigation__container has-text-color items-justified-left no-wrap wp-block-navigation"><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content" href="../notion-templates/"><span class="wp-block-navigation-item__label">Templates</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content" href="../blog/"><span class="wp-block-navigation-item__label">Blog</span></a></li><li class=" wp-block-navigation-item wp-block-navigation-link"><a class="wp-block-navigation-item__content" href="../contact/"><span class="wp-block-navigation-item__label">Contact</span></a></li></ul></nav></div>
 
 
 
@@ -552,7 +716,7 @@ document.documentElement.style.scrollBehavior = "smooth";</script>
 
 
 
-<p class="has-small-font-size"><strong><a href="../best-notion-templates/" target="_blank" rel="noreferrer noopener"><mark style="background-color:rgba(0, 0, 0, 0);color:#616161" class="has-inline-color">Best Notion templates</mark></a></strong> | <strong><a href="../free-notion-templates/" data-type="post" data-id="591" target="_blank" rel="noreferrer noopener"><mark style="background-color:rgba(0, 0, 0, 0);color:#616161" class="has-inline-color">Free Notion templates</mark></a></strong> | <a href="../privacy-policy/" target="_blank" rel="noreferrer noopener"><strong><mark style="background-color:rgba(0, 0, 0, 0);color:#616161" class="has-inline-color">Privacy Policy</mark></strong></a> | <a href="../terms-conditions/" target="_blank" rel="noreferrer noopener"><strong><mark style="background-color:rgba(0, 0, 0, 0);color:#616161" class="has-inline-color">Terms &amp; Conditions</mark></strong></a><br>© Notionrealm - All rights reserved</p>
+<p class="has-small-font-size footer-links-row"><strong><a href="../best-notion-templates/" target="_blank" rel="noreferrer noopener">Best Notion templates</a></strong> | <strong><a href="../free-notion-templates/" data-type="post" data-id="591" target="_blank" rel="noreferrer noopener">Free Notion templates</a></strong> | <a href="../privacy-policy/" target="_blank" rel="noreferrer noopener"><strong>Privacy Policy</strong></a> | <a href="../terms-conditions/" target="_blank" rel="noreferrer noopener"><strong>Terms &amp; Conditions</strong></a><br>© Notionrealm - All rights reserved</p>
 </div>
 </div>
 </div>
@@ -560,7 +724,53 @@ document.documentElement.style.scrollBehavior = "smooth";</script>
 <script type="speculationrules">
 {"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/raft\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
 </script>
-<style id="o-condition-hide-inline-css">@media (max-width:768px){.o-hide-on-mobile{display:none!important}}@media (min-width:767px) and (max-width:1024px){.o-hide-on-tablet{display:none!important}}@media (min-width:1023px){.o-hide-on-desktop{display:none!important}}</style><script id="wp-block-template-skip-link-js-after">
+<style id="o-condition-hide-inline-css">@media (max-width:768px){.o-hide-on-mobile{display:none!important}}@media (min-width:767px) and (max-width:1024px){.o-hide-on-tablet{display:none!important}}@media (min-width:1023px){.o-hide-on-desktop{display:none!important}}
+		/* Footer Links */
+		.footer-links-row a {
+			color: #555 !important;
+			text-decoration: none !important;
+			border-bottom: 1px solid transparent;
+			transition: all 0.2s ease;
+		}
+
+		.footer-links-row a:hover {
+			color: #000 !important;
+			border-bottom: 1px solid #000;
+		}
+
+/* Mobile Header Fixes */
+@media (max-width: 768px) {
+    /* Unhide Logo (just in case) */
+    .o-hide-on-mobile {
+        display: block !important;
+        margin-bottom: 15px;
+    }
+
+    /* Allow Wrapping & Stacking */
+    header .wp-block-group.is-nowrap {
+        flex-wrap: wrap !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+        gap: 15px !important;
+    }
+
+    /* Adjust Navigation */
+    header nav ul {
+        flex-wrap: wrap !important;
+        justify-content: flex-start !important;
+        padding-left: 0 !important;
+        gap: 15px !important;
+    }
+    
+    /* Ensure Button is visible and centered */
+    header .wp-block-buttons {
+        width: 100%;
+        justify-content: flex-start !important;
+        margin-top: 10px;
+    }
+}
+</style><script id="wp-block-template-skip-link-js-after">
 	( function() {
 		var skipLinkTarget = document.querySelector( 'main' ),
 			sibling,
