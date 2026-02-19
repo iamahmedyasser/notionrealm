@@ -1,0 +1,8 @@
+# LLMs.txt for NotionRealm
+
+Site: https://notionrealm.com
+Description: Premium Notion templates for productivity, freelancers, creators, agencies, and students.
+Owner: NotionRealm
+Contact: notionrealm@gmail.com
+
+Allowed: /
