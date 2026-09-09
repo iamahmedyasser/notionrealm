@@ -1,0 +1,254 @@
+{
+  "redirects": [
+    {
+      "source": "/notion-templates/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-templates",
+      "destination": "https://notiontemplates.ocrivia.com/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/blog/$1",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "https://notiontemplates.ocrivia.com/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/best-notion-templates/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/best-notion-templates/$1",
+      "permanent": true
+    },
+    {
+      "source": "/best-notion-templates",
+      "destination": "https://notiontemplates.ocrivia.com/best-notion-templates/",
+      "permanent": true
+    },
+    {
+      "source": "/free-notion-templates/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/free-notion-templates/$1",
+      "permanent": true
+    },
+    {
+      "source": "/free-notion-templates",
+      "destination": "https://notiontemplates.ocrivia.com/free-notion-templates/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-life-planner-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-life-planner-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-life-planner-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-life-planner-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-productivity-system-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-productivity-system-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-productivity-system-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-productivity-system-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-artist-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-artist-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-artist-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-artist-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-agency-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-agency-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-agency-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-agency-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-content-creator-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-content-creator-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-content-creator-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-content-creator-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-freelancer-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-freelancer-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-freelancer-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-freelancer-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-language-learning-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-language-learning-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-language-learning-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-language-learning-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-fitness-life-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-fitness-life-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-fitness-life-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-fitness-life-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-second-brain-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-second-brain-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-second-brain-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-second-brain-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-sales-crm-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-sales-crm-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-sales-crm-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-sales-crm-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-finance-tracker-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-finance-tracker-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-finance-tracker-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-finance-tracker-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-student-planner-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-student-planner-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-student-planner-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-student-planner-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-books-tracker-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-books-tracker-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-books-tracker-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-books-tracker-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-subscription-tracker-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-subscription-tracker-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-subscription-tracker-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-subscription-tracker-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-goals-tracker-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-goals-tracker-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-goals-tracker-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-goals-tracker-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-habit-tracker-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-habit-tracker-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-habit-tracker-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-habit-tracker-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-project-management-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-project-management-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-project-management-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-project-management-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-task-management-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-task-management-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-task-management-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-task-management-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-travel-planner-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-travel-planner-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-travel-planner-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-travel-planner-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-daily-journal-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-daily-journal-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-daily-journal-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-daily-journal-template/",
+      "permanent": true
+    },
+    {
+      "source": "/notion-daily-planner-template/(.*)",
+      "destination": "https://notiontemplates.ocrivia.com/notion-daily-planner-template/$1",
+      "permanent": true
+    },
+    {
+      "source": "/notion-daily-planner-template",
+      "destination": "https://notiontemplates.ocrivia.com/notion-daily-planner-template/",
+      "permanent": true
+    }
+  ]
+}
